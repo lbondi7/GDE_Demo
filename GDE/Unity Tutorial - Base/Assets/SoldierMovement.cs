@@ -21,6 +21,11 @@ public class SoldierMovement : MonoBehaviour {
     public float speed;
     public float z_rotation;
 
+    [Range(0, 100f)]
+    public float startingDelay;
+    public float elapsedTime;
+
+    public AudioSource sirenAudio;
 
     void Awake()
     {
@@ -37,7 +42,7 @@ public class SoldierMovement : MonoBehaviour {
     void Update()
     {
         float step = Time.deltaTime * speed;
-
+        elapsedTime += Time.deltaTime;
         //if ((player.transform.position != playerPos[goToPosition - 1].transform.position))
         //{
         //    player.transform.position = Vector3.MoveTowards(player.transform.position, playerPos[goToPosition - 1].transform.position, step);
@@ -46,9 +51,15 @@ public class SoldierMovement : MonoBehaviour {
         //{
         //    player.transform.Translate(Vector3.forward * speed);
         //}
-        if (currentState.currentPlayerState == GameStates.PlayerStates.GRINDING)
+        if (currentState.currentPlayerState == GameStates.PlayerStates.GRINDING && elapsedTime >= startingDelay)
         {
             MoveSoldier(step);
+
+            if(!sirenAudio.isPlaying)
+            {
+                sirenAudio.Play();
+            }
+
         }
             //StraightOn();
     }

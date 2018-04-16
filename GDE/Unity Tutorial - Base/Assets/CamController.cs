@@ -8,7 +8,7 @@ public class CamController : MonoBehaviour {
     public Camera topCam;
     public Camera[] wallCams = new Camera[2];
     public GameStates currentState;
-    public GameObject[] drawingOverlays = new GameObject[3];
+    public GameObject[] drawingOverlays = new GameObject[6];
     public GameObject avatar;
 
     // Use this for initialization
@@ -46,10 +46,10 @@ public class CamController : MonoBehaviour {
                     wallCams[i].enabled = false;
                 }
             }
-            drawingOverlays[currentState.overlayIndex].SetActive(true);
+            drawingOverlays[currentState.overlayIndex + currentState.currentWallVal * 3].SetActive(true);
             for (int i = 0; i < drawingOverlays.Length; i++)
             {
-                if (i != currentState.overlayIndex)
+                if (i != currentState.overlayIndex + currentState.currentWallVal * 3)
                 {
                     drawingOverlays[i].SetActive(false);
                 }

@@ -49,7 +49,6 @@ public class Jump : MonoBehaviour {
     {
         if(col.gameObject.tag == "Rail")
         grounded = true;
-        Debug.Log("Hlo");
 
         if (!landingAudio.isPlaying && !firstTime)
         {
@@ -65,7 +64,6 @@ public class Jump : MonoBehaviour {
             if (transform.position.y < rail.transform.position.y)
             {
                 currentState.currentPlayerState = GameStates.PlayerStates.FALLING;
-                Debug.Log("HEllo");
             }
         }
     }

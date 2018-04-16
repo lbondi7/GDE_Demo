@@ -5,12 +5,17 @@ using UnityEngine;
 public class CheckLine : MonoBehaviour {
 
     public bool failed;
-
+    public AudioSource incorrectAudio;
     void Update()
     {
         if(Input.GetMouseButtonDown(0))
         {
             failed = false;
+        }
+
+        if(Input.GetMouseButtonUp(0) && failed && !incorrectAudio.isPlaying)
+        {
+            incorrectAudio.Play();
         }
     }
     void OnMouseExit()

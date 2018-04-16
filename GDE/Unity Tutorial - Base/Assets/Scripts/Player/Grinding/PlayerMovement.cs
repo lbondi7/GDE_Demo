@@ -15,6 +15,8 @@ public class PlayerMovement : MonoBehaviour
     public AudioSource grindingAudio;
     public GameObject  grindingObj;
     public AudioSource landingAudio;
+    public GameObject landingObj;
+    public AudioSource fallingAudio;
     public Jump jumpState;
     public float prevPos = 4;
     private bool turned = false;
@@ -25,6 +27,7 @@ public class PlayerMovement : MonoBehaviour
     public float z_rotation;
     private Animator anim;
     private AnimationController animCon;
+    private bool played;
 
 
     void Awake()
@@ -72,8 +75,16 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (currentState.currentPlayerState == GameStates.PlayerStates.FALLING)
         {
+            grindingObj.SetActive(false);
+            landingObj.SetActive(false);
             grindingAudio.Stop();
             anim.SetBool(animCon.fallingState, true);
+
+            if(!fallingAudio.isPlaying&& !played)
+            {
+                fallingAudio.Play();
+                played = true;
+            }
         }
     }
 
